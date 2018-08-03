@@ -1,3 +1,6 @@
+/*
+Package bob provides a Hey method to give a response from bob to a message.
+*/
 package bob
 
 import (

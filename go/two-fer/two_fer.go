@@ -1,3 +1,8 @@
+/*
+Package twofer offers a simple method for templating
+a string "One for X, one for me." where X is a name
+of "you".
+*/
 package twofer
 
 import "fmt"

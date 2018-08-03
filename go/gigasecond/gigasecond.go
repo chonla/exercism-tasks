@@ -1,3 +1,7 @@
+/*
+Package gigasecond provide a simple method to calculate
+the moment from given time with a gigasecond (10^9 seconds).
+*/
 package gigasecond
 
 import "time"
