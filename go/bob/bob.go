@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Hey returns a response from bob.
 func Hey(remark string) string {
 	remark = strings.TrimSpace(remark)
 	if remark == "" {
@@ -25,12 +26,14 @@ func Hey(remark string) string {
 	return "Whatever."
 }
 
+// allCaps determines if remark is a yelling.
 func allCaps(remark string) bool {
 	m, _ := regexp.Match("[a-z]", []byte(remark))
 	M, _ := regexp.Match("[A-Z]", []byte(remark))
 	return !m && M
 }
 
+// allCaps determines if remark is a question.
 func question(remark string) bool {
 	return remark[len(remark)-1] == '?'
 }

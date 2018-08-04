@@ -7,6 +7,8 @@ package twofer
 
 import "fmt"
 
+// ShareWith returns a compiled version of "One for X, one for me." template
+// with given name.
 func ShareWith(name string) string {
 	if name == "" {
 		name = "you"

@@ -6,6 +6,7 @@ package gigasecond
 
 import "time"
 
+// AddGigasecond returns a moment at given time plus 10^9 seconds.
 func AddGigasecond(t time.Time) time.Time {
 	d, _ := time.ParseDuration("1000000000s")
 	t = t.Add(d)
