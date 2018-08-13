@@ -22,9 +22,9 @@ func Valid(num string) bool {
 		num = fmt.Sprintf("0%s", num)
 		n = len(num)
 	}
-	for i, d := 0, 0; i < n; i++ {
+	for i := 0; i < n; i++ {
 		if '0' <= num[i] && num[i] <= '9' {
-			if d&1 == 1 {
+			if i%2 == 1 {
 				crc += int(num[i] - '0')
 			} else {
 				s := int(num[i]-'0') * 2
@@ -33,7 +33,6 @@ func Valid(num string) bool {
 				}
 				crc += s
 			}
-			d++
 		} else {
 			return false
 		}
