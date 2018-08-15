@@ -18,7 +18,7 @@ func Valid(num string) bool {
 	}
 
 	crc := 0
-	if n&1 == 1 {
+	if n%2 == 1 {
 		num = fmt.Sprintf("0%s", num)
 		n = len(num)
 	}
