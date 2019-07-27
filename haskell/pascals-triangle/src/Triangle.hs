@@ -1,19 +1,17 @@
 module Triangle (rows) where
 
 factorial :: Int -> Int
-factorial x
-    | x > 0 = x * (factorial (x - 1))
-    | x == 1 = 1
+factorial n
+    | n <= 1 = 1
+    | otherwise = n * factorial (n - 1)
+
+elementAt :: Int -> Int -> Integer
+elementAt r n = fromIntegral (factorial (r - 1) `div` (factorial n * factorial (r - 1 - n)))
 
 row :: Int -> [Integer]
-row x
-    | x == 1 = [1]
-    | x > 1 = elementInRow x 1
-
-elementInRow :: Int -> Int -> Int
-elementInRow r i = (factorial r) / ((factorial i) * (factorial r - i))
+row x = map (\e -> elementAt x e) [0..(x-1)]
 
 rows :: Int -> [[Integer]]
 rows x
     | x == 0 = []
-    | x > 0 = (row x) : rows (x - 1)
+    | otherwise = rows (x - 1) ++ [row x]
