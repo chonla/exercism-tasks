@@ -3,6 +3,11 @@ module Queens (boardString, canAttack) where
 put :: Char -> Int -> Int -> String -> String
 put bw locY locX board = (take ((locY * 16) + (locX * 2)) board) ++ [bw] ++ (drop ((locY * 16) + (locX * 2 + 1)) board)
 
+absoluteValue :: Double -> Double
+absoluteValue v
+    | v < 0 = v * (-1.0)
+    | otherwise = v
+
 boardString :: Maybe (Int, Int) -> Maybe (Int, Int) -> String
 boardString Nothing Nothing = concat $ (replicate 8 "_ _ _ _ _ _ _ _\n")
 boardString (Just (wx, wy)) Nothing = put 'W' wx wy (boardString Nothing Nothing)
@@ -10,4 +15,12 @@ boardString Nothing (Just (bx, by)) = put 'B' bx by (boardString Nothing Nothing
 boardString (Just (wx, wy)) (Just (bx, by)) = put 'W' wx wy (put 'B' bx by (boardString Nothing Nothing))
 
 canAttack :: (Int, Int) -> (Int, Int) -> Bool
-canAttack queenA queenB = error "You need to implement this function."
+canAttack (ax, ay) (bx, by)
+    | sameRank = True
+    | sameFile = True
+    | isDiagonal = True
+    | otherwise = False
+        where
+            sameRank = ax == bx
+            sameFile = ay == by
+            isDiagonal = absoluteValue ((fromIntegral (bx - ax)) / (fromIntegral (by - ay))) == 1.0
