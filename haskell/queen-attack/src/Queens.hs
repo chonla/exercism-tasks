@@ -3,11 +3,6 @@ module Queens (boardString, canAttack) where
 put :: Char -> Int -> Int -> String -> String
 put bw locY locX board = (take ((locY * 16) + (locX * 2)) board) ++ [bw] ++ (drop ((locY * 16) + (locX * 2 + 1)) board)
 
-absoluteValue :: Double -> Double
-absoluteValue v
-    | v < 0 = v * (-1.0)
-    | otherwise = v
-
 boardString :: Maybe (Int, Int) -> Maybe (Int, Int) -> String
 boardString Nothing Nothing = concat $ (replicate 8 "_ _ _ _ _ _ _ _\n")
 boardString (Just (wx, wy)) Nothing = put 'W' wx wy (boardString Nothing Nothing)
@@ -23,4 +18,4 @@ canAttack (ax, ay) (bx, by)
         where
             sameRank = ax == bx
             sameFile = ay == by
-            isDiagonal = absoluteValue ((fromIntegral (bx - ax)) / (fromIntegral (by - ay))) == 1.0
+            isDiagonal = abs (bx - ax) == abs (by - ay)
