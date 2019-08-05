@@ -32,6 +32,10 @@ fewerSolution (Just s1) (Just s2)
     | length s1 > length s2 = Just s2
     | otherwise = Just s1
 
+anySolution :: Integer -> [Integer] -> Maybe [Integer]
+anySolution _ [] = Nothing
+anySolution target coins = fewerSolution (coinsUsed target coins) (anySolution target (delast coins))
+
 findFewestCoins :: Integer -> [Integer] -> Maybe [Integer]
 findFewestCoins _ [] = Nothing
-findFewestCoins target coins = fewerSolution (coinsUsed target coins) (findFewestCoins target (delast coins))
+findFewestCoins target coins = anySolution target coins
