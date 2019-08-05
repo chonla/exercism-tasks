@@ -1,7 +1,5 @@
 module Change (findFewestCoins) where
 
--- import Data.Maybe
-
 delast :: [Integer] -> [Integer]
 delast [] = []
 delast list = (reverse . tail) (reverse list)
