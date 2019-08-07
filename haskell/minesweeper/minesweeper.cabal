@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3c96a4dda4e0892e4d0747e3883f07495d3b600ecea38d40bef67ca0f186483f
+-- hash: fddb4634780247570433eb2f9cfbe007acaf9af0f33ea67e5ba3c498628a348b
 
 name:           minesweeper
 version:        1.1.0.5
@@ -19,7 +19,8 @@ library
       src
   ghc-options: -Wall
   build-depends:
-      base
+      array
+    , base
   default-language: Haskell2010
 
 test-suite test
@@ -30,7 +31,8 @@ test-suite test
   hs-source-dirs:
       test
   build-depends:
-      base
+      array
+    , base
     , hspec
     , minesweeper
   default-language: Haskell2010
