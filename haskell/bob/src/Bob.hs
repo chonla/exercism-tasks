@@ -17,6 +17,6 @@ respond xs
     | otherwise = "Whatever."
     where
         isSayingNothing = T.null xs
-        isSayingSomething = T.any (`elem` ['a'..'z']) (T.toLower xs)
+        isSayingSomething = T.any C.isLetter xs
         isYelling = isSayingSomething && T.all (`elem` ['A'..'Z']) (T.filter (C.isAlpha) xs)
         isQuestioning = T.isSuffixOf "?" xs
