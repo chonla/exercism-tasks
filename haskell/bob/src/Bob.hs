@@ -1,17 +1,22 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Bob (responseFor) where
 
 import Data.Text as T
+import Data.Char as C
 
 responseFor :: Text -> Text
-responseFor xs
-    | isSayingNothing = pack "Fine. Be that way!"
-    | isYelling && isQuestioning = pack "Calm down, I know what I'm doing!"
-    | isYelling = pack "Whoa, chill out!"
-    | isQuestioning = pack "Sure."
-    | otherwise = pack "Whatever."
+responseFor = respond . T.stripEnd
+
+respond :: Text -> Text
+respond xs
+    | isSayingNothing = "Fine. Be that way!"
+    | isYelling && isQuestioning = "Calm down, I know what I'm doing!"
+    | isYelling = "Whoa, chill out!"
+    | isQuestioning = "Sure."
+    | otherwise = "Whatever."
     where
-        trimmedRequest = T.strip xs
-        isSayingNothing = trimmedRequest == (pack "")
-        isSayingSomething = not $ T.null (T.filter (`elem` ['a'..'z']) (T.toLower trimmedRequest))
-        isYelling = isSayingSomething && ((T.toUpper trimmedRequest) == trimmedRequest)
-        isQuestioning = (T.last trimmedRequest)== '?'
+        isSayingNothing = T.null xs
+        isSayingSomething = T.any (`elem` ['a'..'z']) (T.toLower xs)
+        isYelling = isSayingSomething && T.all (`elem` ['A'..'Z']) (T.filter (C.isAlpha) xs)
+        isQuestioning = T.isSuffixOf "?" xs
