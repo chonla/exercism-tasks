@@ -1,15 +1,20 @@
 module CollatzConjecture (collatz) where
 
-collatzStep :: Integer -> Integer -> Integer
-collatzStep num stepCount
-    | num == 1 = stepCount
-    | isEven num = collatzStep (num `div` 2) nextStep
-    | otherwise = collatzStep ((num * 3) + 1) nextStep
+evalCollatz :: Integer -> Integer
+evalCollatz num
+    | num == 1 = 1
+    | num `mod` 2 == 0 = num `div` 2
+    | otherwise = (num * 3) + 1
+
+buildCollatzSequence :: Integer -> [Integer]
+buildCollatzSequence num
+    | c == 1 = [c]
+    | otherwise = c : (buildCollatzSequence c)
         where
-            isEven n = n `mod` 2 == 0
-            nextStep = stepCount + 1
+            c = evalCollatz num
 
 collatz :: Integer -> Maybe Integer
 collatz num
     | num <= 0 = Nothing
-    | otherwise = Just (collatzStep num 0)
+    | num == 1 = Just 0
+    | otherwise = Just (fromIntegral (length (buildCollatzSequence num)))
