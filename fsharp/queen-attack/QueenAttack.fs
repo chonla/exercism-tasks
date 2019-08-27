@@ -1,6 +1,6 @@
 ﻿module QueenAttack
 
-let create ((r, c): int * int) = ((0 <= r) && (r <= 7)) && ((0 <= c) && (c <= 7))
+let create ((row, col): int * int) = (0 <= row) && (row <= 7) && (0 <= col) && (col <= 7)
 
-let canAttack ((r1, c1): int * int) ((r2, c2): int * int) = 
-    (c1 = c2) || (r1 = r2) || (abs((r1 - r2) / (c1 - c2)) = 1)
+let canAttack ((row1, col1): int * int) ((row2, col2): int * int) = 
+    (col1 = col2) || (row1 = row2) || (abs((row1 - row2) / (col1 - col2)) = 1)
