@@ -2,8 +2,7 @@ module CollatzConjecture (collatz) where
 
 evalCollatz :: Integer -> Integer
 evalCollatz num
-    | num == 1 = 1
-    | num `mod` 2 == 0 = num `div` 2
+    | even num = num `div` 2
     | otherwise = (num * 3) + 1
 
 buildCollatzSequence :: Integer -> [Integer]
