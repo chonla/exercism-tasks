@@ -1,9 +1,11 @@
 ﻿module Raindrops
 
-let drop = Map.empty.Add(3, "Pling").Add(5, "Plang").Add(7, "Plong")
+let drop: Map<int,string> = Map.ofSeq([(3, "Pling");(5, "Plang");(7, "Plong")])
 
 let convert (number: int): string =
-    let r = Array.map (fun num -> drop.[num]) ( Array.filter (fun num -> number % num = 0) [| 3; 5; 7 |] )
-    match Array.isEmpty(r) with
-    | true -> number.ToString()
-    | _ -> String.concat "" r
+    let dropkeys = Array.map (fun (k, v) -> k) (Map.toArray (drop))
+    let r = Array.map (fun num -> drop.[num]) (Array.filter (fun num -> number % num = 0) dropkeys)
+    if Array.isEmpty(r) then
+        number.ToString()
+    else
+        String.concat "" r
