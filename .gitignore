@@ -2,3 +2,5 @@
 fsharp/**/bin/
 fsharp/**/obj/
 fsharp/**/.ionide/
+.elixir_ls/
+.ionide/
