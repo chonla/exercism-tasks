@@ -17,7 +17,7 @@ defmodule RnaTranscription do
   end
 
   def dna_rna_map(c) do
-    dnaMap = %{71=>67, 67=>71, 84=>65, 65=>85}
+    dnaMap = %{?G=>?C, ?C=>?G, ?T=>?A, ?A=>?U}
     dnaMap[c]
   end
 end
