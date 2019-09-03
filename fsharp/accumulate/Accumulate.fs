@@ -1,7 +1,7 @@
 ﻿module Accumulate
 
 let accumulate (func: 'a -> 'b) (input: 'a list): 'b list = 
-    let rec mapAccum f acc = function
+    let rec mapAccum acc = function
         | [] -> acc
-        | head::tail -> mapAccum f (f head :: acc) tail
-    mapAccum func [] input |> List.rev
+        | head::tail -> mapAccum (func head :: acc) tail
+    mapAccum [] input |> List.rev
