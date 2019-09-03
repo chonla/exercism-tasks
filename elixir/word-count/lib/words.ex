@@ -8,8 +8,11 @@ defmodule Words do
 
   @spec count(String.t()) :: map
   def count(sentence) do
-    words = Enum.filter(String.split(String.downcase(sentence), @unword_chars), fn w -> w != "" end)
-    List.foldl(words, %{}, fn word, acc -> tally(word, acc) end)
+    sentence
+      |> String.downcase()
+      |> String.split(@unword_chars)
+      |> Enum.filter(fn w -> w != "" end)
+      |> List.foldl(%{}, fn word, acc -> tally(word, acc) end)
   end
 
   defp tally(word, counter) do
