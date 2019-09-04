@@ -10,8 +10,12 @@ defmodule Words do
   def count(sentence) do
     sentence
       |> String.downcase()
-      |> String.split(@unword_chars, trim: true)
+      |> words
       |> List.foldl(%{}, fn word, acc -> tally(word, acc) end)
+  end
+
+  defp words(line) do
+    String.split(line, @unword_chars, trim: true)
   end
 
   defp tally(word, counter) do
