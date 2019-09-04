@@ -10,8 +10,7 @@ defmodule Words do
   def count(sentence) do
     sentence
       |> String.downcase()
-      |> String.split(@unword_chars)
-      |> Enum.filter(fn w -> w != "" end)
+      |> String.split(@unword_chars, trim: true)
       |> List.foldl(%{}, fn word, acc -> tally(word, acc) end)
   end
 
