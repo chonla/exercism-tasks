@@ -9,8 +9,8 @@ defmodule Words do
   @spec count(String.t()) :: map
   def count(sentence) do
     sentence
-      |> words
-      |> group
+      |> words()
+      |> group()
   end
 
   defp group(words) do
