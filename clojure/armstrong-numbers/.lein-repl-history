@@ -1,0 +1,17 @@
+:q\
+(require 'bob-test)
+(require 'lib/bob-test)
+l
+ls
+dir
+quit
+(require 'armstrong-number-test
+)
+(require 'armstrong-number-test)
+(require 'bob-test)
+(require 'armstrong-numbers-test)
+(require 'armstrong-numbers)
+(require 'armstrong-numbers-test)
+(require 'armstrong-numbers)
+(clojure.teest/run-tests 'armstrong-numbers)
+quit;
