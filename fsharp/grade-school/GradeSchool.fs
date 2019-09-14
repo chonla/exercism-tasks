@@ -16,7 +16,5 @@ let roster (school : School) : string list =
     |> List.collect snd
 
 let grade (number : int) (school : School) : string list =
-    let students = Map.tryFind number school
-    match students with
-    | Some v -> v
-    | None -> []
+    Map.tryFind number school
+    |> Option.defaultValue []
