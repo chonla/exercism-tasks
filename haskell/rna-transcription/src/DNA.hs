@@ -1,16 +1,18 @@
 module DNA (toRNA) where
 
-import Data.Map as M
+import Data.Maybe
 
-dna :: Map Char Char
-dna = M.fromList [('C', 'G'), ('G', 'C'), ('T', 'A'), ('A', 'U')]
-
-concatRNA :: Char -> Either Char String -> Either Char String
-concatRNA _ (Left c) = Left c
-concatRNA c (Right s) = Right (c:s)
+dna :: Char -> Maybe Char
+dna 'C' = Just 'G'
+dna 'G' = Just 'C'
+dna 'T' = Just 'A'
+dna 'A' = Just 'U'
+dna _ = Nothing
 
 toRNA :: String -> Either Char String
-toRNA "" = Right ""
-toRNA (x:xs)
-    | M.notMember x dna = Left x
-    | otherwise = concatRNA (dna!x) (toRNA xs)
+toRNA x 
+    | firstFail /= [] = Left (fst (head firstFail))
+    | otherwise = Right (map (fromJust . snd) transcription)
+    where
+        transcription = zip x (fmap (dna) x)
+        firstFail = filter (\p -> snd p == Nothing) transcription
