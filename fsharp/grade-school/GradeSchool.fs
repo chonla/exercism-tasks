@@ -13,8 +13,7 @@ let add (student : string) (grade : int) (school : School) : School =
 let roster (school : School) : string list =
     school
     |> Map.toList
-    |> List.map snd
-    |> List.fold List.append []
+    |> List.collect snd
 
 let grade (number : int) (school : School) : string list =
     let students = Map.tryFind number school
