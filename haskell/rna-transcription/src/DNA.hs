@@ -1,15 +1,11 @@
 module DNA (toRNA) where
 
-dna :: Char -> Maybe Char
-dna 'C' = Just 'G'
-dna 'G' = Just 'C'
-dna 'T' = Just 'A'
-dna 'A' = Just 'U'
-dna _ = Nothing
+dna :: Char -> Either Char Char
+dna 'C' = Right 'G'
+dna 'G' = Right 'C'
+dna 'T' = Right 'A'
+dna 'A' = Right 'U'
+dna c = Left c
 
-toRNA :: [Char] -> Either Char String
-toRNA [] = Right []
-toRNA (x:xs) =
-    case dna x of
-        Just c -> fmap (c :) (toRNA xs)
-        Nothing -> Left x
+toRNA :: [Char] -> Either Char [Char]
+toRNA = traverse dna
