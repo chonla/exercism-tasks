@@ -7,9 +7,9 @@ dna 'T' = Just 'A'
 dna 'A' = Just 'U'
 dna _ = Nothing
 
-toRNA :: String -> Either Char String
+toRNA :: [Char] -> Either Char String
 toRNA [] = Right []
 toRNA (x:xs) =
     case dna x of
-        Just c -> fmap ([c] ++) (toRNA xs)
+        Just c -> fmap (c :) (toRNA xs)
         Nothing -> Left x
