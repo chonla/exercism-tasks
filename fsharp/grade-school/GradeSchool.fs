@@ -5,12 +5,14 @@ type School = Map<int, string list>
 let empty : School = Map.empty
 
 let add (student : string) (grade : int) (school : School) : School =
-    let newRoster studentList = Map.add grade studentList school
+    let newRoster studentList = school |> Map.add grade studentList
+
     school
     |> Map.tryFind grade
-    |> function
-        | Some students -> newRoster (List.sort (student :: students))
-        | None -> newRoster [student]
+    |> Option.defaultValue []
+    |> List.append [student]
+    |> List.sort 
+    |> newRoster
 
 let roster (school : School) : string list =
     school
