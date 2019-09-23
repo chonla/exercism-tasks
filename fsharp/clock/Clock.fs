@@ -19,4 +19,8 @@ let add minutes (Clock clock) =
 let subtract minutes (Clock clock) = 
     Clock (modulo (clock - minutes) MinutesInADay)
 
-let display (Clock clock) = sprintf "%02d:%02d" (clock / 60) (clock % 60)
+let hoursOf (Clock clock) = clock / 60
+
+let minutesOf (Clock clock) = clock % 60
+
+let display clock = sprintf "%02d:%02d" (hoursOf clock) (minutesOf clock)
