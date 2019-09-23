@@ -5,19 +5,19 @@ type clock = Clock of int
 [<Literal>]
 let MinutesInADay = 1440
 
-let modulo dividend divisor =
-    if dividend = 0 then 0
-    elif dividend > 0 then dividend % divisor
-    else divisor + (dividend % divisor)
+let offsetTime offset =
+    if offset = 0 then 0
+    elif offset > 0 then offset % MinutesInADay
+    else MinutesInADay + (offset % MinutesInADay)
 
 let create hours minutes = 
-    Clock (modulo ((hours * 60) + minutes) MinutesInADay)
+    Clock (offsetTime ((hours * 60) + minutes))
 
 let add minutes (Clock clock) = 
-    Clock (modulo (clock + minutes) MinutesInADay)
+    Clock (offsetTime (clock + minutes))
 
 let subtract minutes (Clock clock) = 
-    Clock (modulo (clock - minutes) MinutesInADay)
+    Clock (offsetTime (clock - minutes))
 
 let hoursOf (Clock clock) = clock / 60
 
