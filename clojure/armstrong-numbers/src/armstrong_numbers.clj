@@ -1,16 +1,14 @@
 (ns armstrong-numbers)
 
-(defn digits [num]
+(defn digitize [num]
   (map #(- (int %) (int \0)) (str num)))
-
-(defn len [num] 
-  (count (digits num)))
 
 (defn power [num pow]
   (reduce * (repeat pow num)))
 
-(defn sum-power [num pow]
-  (reduce + (map #(power % pow) (digits num))))
+(defn sum-power [digits pow]
+  (reduce + (map #(power % pow) digits)))
 
 (defn armstrong? [num] ;; <- arglist goes here
-  (= (sum-power num (len num)) num))
+  (let [digits (digitize num)]
+    (= (sum-power digits (count digits)) num)))
