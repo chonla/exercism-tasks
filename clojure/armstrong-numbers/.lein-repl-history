@@ -15,3 +15,40 @@ quit
 (require 'armstrong-numbers)
 (clojure.teest/run-tests 'armstrong-numbers)
 quit;
+"123"
+['1','2','3']
+['1';'2';'3']
+;
+;;
+;
+map (println) "123"
+map (println) (seq "123")
+(map (println) (seq "123"))
+(map (print) (seq "123"))
+
+quit:
+quit;;
+map (print) (seq "1234")
+(map (print) (seq "1234"))
+(map #(print) (seq "1234"))
+(map #(print %) (seq "1234"))
+(map #(println %) (seq "1234"))
+(map (println %) (seq "1234"))
+(map #(println %) (seq "1234"))
+quit;;
+("3"-48)
+("3" - 48)
+('3' - 48)
+(defn len [num] 
+  (count (seq (str num))))
+len 1491
+(len 1491)
+(len 149415231)
+(int "3")
+(int '3')
+(map #(int %) "32")
+quit;;
+(defn digits [num]
+  (map #(- (int %) (int \0)) (str num)))
+(digits 14712)
+quit;;

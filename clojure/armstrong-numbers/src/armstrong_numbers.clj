@@ -1,20 +1,16 @@
 (ns armstrong-numbers)
 
-
 (defn digits [num]
-  (loop [n num]
-    (if (< n 10)
-      [n]
-      (do (conj (digits (/ (- num (rem num 10)) 10)) (rem num 10))))))
+  (map #(- (int %) (int \0)) (str num)))
 
-(defn power-of [num pow]
+(defn len [num] 
+  (count (digits num)))
+
+(defn power [num pow]
   (reduce * (repeat pow num)))
 
-(defn sum-of [num]
-  (reduce + num))
-
 (defn sum-power [num pow]
-  (sum-of (map #(power-of % pow) (digits num))))
+  (reduce + (map #(power % pow) (digits num))))
 
 (defn armstrong? [num] ;; <- arglist goes here
-  (= (sum-power num (count (digits num))) num))
+  (= (sum-power num (len num)) num))
