@@ -16,11 +16,11 @@ let create hours minutes =
 let add minutes (Clock clock) = 
     Clock (offsetTime (clock + minutes))
 
-let subtract minutes (Clock clock) = 
-    Clock (offsetTime (clock - minutes))
+let subtract minutes clock = 
+    add (-minutes) clock
 
-let hoursOf (Clock clock) = clock / 60
+let timeOf (Clock clock) = (clock / 60, clock % 60)
 
-let minutesOf (Clock clock) = clock % 60
-
-let display clock = sprintf "%02d:%02d" (hoursOf clock) (minutesOf clock)
+let display clock = 
+    let time = timeOf clock
+    sprintf "%02d:%02d" (fst time) (snd time)
