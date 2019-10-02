@@ -1,0 +1,12 @@
+first "abcd"
+(first "abcd"))
+(first "abcd")
+(rest "abcd")
+(first (rest "abcd")
+))
+(first (rest "abcd"))
+(conj (rest "abcd") (first "abcd"))
+(conj '(rest "abcd") (first "abcd"))
+(conj (first "abcd") (rest "abcd"))
+:q
+quit;;
