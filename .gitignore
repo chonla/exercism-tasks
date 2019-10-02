@@ -5,3 +5,4 @@ fsharp/**/.ionide/
 .elixir_ls/
 .ionide/
 javascript/**/node_modules/
+scala/**/target/
