@@ -1,25 +1,25 @@
 ﻿module Bob
 
-let shouting (input: string): bool = 
-    (input.Length > 0) && (input.ToUpper() = input)
+let (|Shouting|_|) (input: string): Option<unit> = 
+    if input.Length > 0 && input.ToUpper () = input then Some Shouting else None
 
-let questioning (input: string): bool =
-    input.EndsWith("?")
+let (|Questioning|_|) (input: string): Option<unit> =
+    if input.EndsWith "?" then Some Questioning else None
 
-let forcefulQuestioning (input: string): bool =
-    shouting(input) && questioning(input) && (input.Length > 1)
+let (|Saying|_|) (input: string): Option<unit> =
+    if input.Length > 1 then Some Saying else None
 
-let cleanup (input: string): string =
+let removeNonwordChars (input: string): string =
     input
-    |> String.filter (fun c -> (System.Char.IsLetter c) || (c = '?'))
+    |> String.filter (fun c -> System.Char.IsLetter c || c = '?')
 
 let response (input: string): string = 
-    let cleanInput = cleanup(input)
-    if input.Trim() = "" then
+    if input.Trim () = "" then
         "Fine. Be that way!"
     else
+        let cleanInput = removeNonwordChars input
         match cleanInput with
-        | cleanInput when forcefulQuestioning(cleanInput) -> "Calm down, I know what I'm doing!"
-        | cleanInput when questioning(cleanInput) -> "Sure."
-        | cleanInput when shouting(cleanInput) -> "Whoa, chill out!"
+        | Saying & Shouting & Questioning -> "Calm down, I know what I'm doing!"
+        | Questioning -> "Sure."
+        | Shouting -> "Whoa, chill out!"
         | _ -> "Whatever."
