@@ -1,0 +1,88 @@
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (Character/isLetter c) (= c "?"))) s)))
+(remove-unword-chars "TEST 123 ? Hello,dok"
+)
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (Character/isLetter c) (= c '?'))) s)))
+(remove-unword-chars "TEST 123 ? Hello,dok")
+(or true false)
+(remove-unword-chars "T?")
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (Character/isLetter c) (= '?' c))) s)))
+(remove-unword-chars "T?")
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (= c '?') (Character/isLetter c))) s)))
+(remove-unword-chars "T?")
+(let c '?' (or (= c '?') (Character/isLetter c))))
+(let c '?' (or (= c '?') (Character/isLetter c)))
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (= c "?") (Character/isLetter c))) s)))
+(remove-unword-chars "T?")
+(filter (fn [c] (or (= c "?") (Character/isLetter c))) "T?")
+(filter (fn [c] (= c "?")) "T?")
+(filter (fn [c] (= c '?')) "T?")
+(filter (fn [c] (= c '\?')) "T?")
+(filter (fn [c] (= c \?)) "T?")
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (= c \?) (Character/isLetter c))) s)))
+(remove-unword-chars "T?")
+(remove-unword-chars "TEST 123 ? Hello,dok")
+:quit
+::quit
+:quit
+:quit()
+(quit)
+(ns bob
+  (:require [clojure.string :as str]))
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (= c \?) (Character/isLetter c))) s)))
+(defn shouting? [s]
+  (= s (str/upper-case (remove-unword-chars s))))
+(defn questioning? [s]
+  (str/ends-with? (remove-unword-chars s) "?"))
+(defn saying? [s]
+  (not (str/blank? (remove-unword-chars s))))
+(defn nothing? [s]
+  (str/blank? s))
+(defn response-for [s]
+    (cond
+      (nothing? s) "Fine. Be that way!"
+      (and (saying? s) (questioning? s) (shouting? s)) "Calm down, I know what I'm doing!"
+      (questioning? s) "Sure."
+      (shouting? s) "Whoa, chill out!"
+      :else "Whatever.")
+  )
+(response-for "HO!")
+(shouting? "HO!")
+(remove-unword-chars "HO!")
+(defn shouting? [s]
+  (let clean-s (remove-unword-chars s)
+    (= clean-s (str/upper-case clean-s))))
+(defn shouting? [s]
+  (let [clean-s (remove-unword-chars s)]
+    (= clean-s (str/upper-case clean-s))))
+(remove-unword-chars "HO!")
+(quit)
+(ns bob
+  (:require [clojure.string :as str]))
+(defn remove-unword-chars [s]
+  (apply str (filter (fn [c] (or (= c \?) (Character/isLetter c))) s)))
+(defn shouting? [s]
+  (let [clean-s (remove-unword-chars s)]
+    (= clean-s (str/upper-case clean-s))))
+(defn questioning? [s]
+  (str/ends-with? (remove-unword-chars s) "?"))
+(defn saying? [s]
+  (not (str/blank? (remove-unword-chars s))))
+(defn nothing? [s]
+  (str/blank? s))
+(defn response-for [s]
+    (cond
+      (nothing? s) "Fine. Be that way!"
+      (and (saying? s) (questioning? s) (shouting? s)) "Calm down, I know what I'm doing!"
+      (questioning? s) "Sure."
+      (shouting? s) "Whoa, chill out!"
+      :else "Whatever.")
+  )
+(remove-unword-chars "123")
+(quit)
