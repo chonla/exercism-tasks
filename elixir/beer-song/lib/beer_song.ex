@@ -11,13 +11,20 @@ defmodule BeerSong do
     "#{number} bottles of beer on the wall, #{number} bottles of beer.\n"
   end
 
+  def beer_left_on_the_wall_verse(0) do
+    "Take it down and pass it around, no more bottles of beer on the wall.\n"
+  end
+
+  def beer_left_on_the_wall_verse(1) do
+    "Take one down and pass it around, 1 bottle of beer on the wall.\n"
+  end
+
+  def beer_left_on_the_wall_verse(number) when number < 0 do
+      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+  end
+
   def beer_left_on_the_wall_verse(number) do
-    cond do
-      number == 0 -> "Take it down and pass it around, no more bottles of beer on the wall.\n"
-      number == 1 -> "Take one down and pass it around, 1 bottle of beer on the wall.\n"
-      number < 0 -> "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
-      true -> "Take one down and pass it around, #{number} bottles of beer on the wall.\n"
-    end
+    "Take one down and pass it around, #{number} bottles of beer on the wall.\n"
   end
 
   @doc """
