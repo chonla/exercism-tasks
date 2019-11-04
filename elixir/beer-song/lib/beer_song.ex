@@ -1,10 +1,14 @@
 defmodule BeerSong do
+  def beer_on_the_wall_verse(1) do
+    "1 bottle of beer on the wall, 1 bottle of beer.\n"
+  end
+
+  def beer_on_the_wall_verse(0) do
+    "No more bottles of beer on the wall, no more bottles of beer.\n"
+  end
+
   def beer_on_the_wall_verse(number) do
-    cond do
-      number == 1 -> "1 bottle of beer on the wall, 1 bottle of beer.\n"
-      number == 0 -> "No more bottles of beer on the wall, no more bottles of beer.\n"
-      true -> "#{number} bottles of beer on the wall, #{number} bottles of beer.\n"
-    end
+    "#{number} bottles of beer on the wall, #{number} bottles of beer.\n"
   end
 
   def beer_left_on_the_wall_verse(number) do
