@@ -11,10 +11,10 @@ main() {
     if (( $1 % 7 == 0 )); then
         accu+="Plong"
     fi
-    if [ "$accu" == "" ]; then
+    if [[ -z $accu ]]; then
         accu=$1
     fi
-    echo $accu
+    echo "$accu"
 }
 
 main "$@"
