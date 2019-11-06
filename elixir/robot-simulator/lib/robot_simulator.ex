@@ -19,6 +19,10 @@ defmodule RobotSimulator do
   @commandL 76
   @commandR 82
 
+  @invalid_instruction {:error, "invalid instruction"}
+  @invalid_direction {:error, "invalid direction"}
+  @invalid_position {:error, "invalid position"}
+
   @doc """
   Create a Robot Simulator given an initial direction and position.
 
@@ -32,11 +36,11 @@ defmodule RobotSimulator do
   end
 
   def create(dir, _) when not valid_dir(dir) do
-    {:error, "invalid direction"}
+    @invalid_direction
   end
 
   def create(_, pos) when not valid_position(pos) do
-    {:error, "invalid position"}
+    @invalid_position
   end
 
   @doc """
@@ -45,8 +49,8 @@ defmodule RobotSimulator do
   Valid instructions are: "R" (turn right), "L", (turn left), and "A" (advance)
   """
   @spec simulate(robot :: any, instructions :: String.t()) :: any
-  def simulate({:error, "invalid instruction"}, _) do
-    {:error, "invalid instruction"}
+  def simulate(@invalid_instruction, _) do
+    @invalid_instruction
   end
   
   def simulate(robot, "") do
@@ -107,7 +111,7 @@ defmodule RobotSimulator do
   end
 
   def move(_, _) do
-    {:error, "invalid instruction"}
+    @invalid_instruction
   end
 
   
