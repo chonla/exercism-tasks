@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
 main() {
-    if (( $1 % 3 != 0 && $1 % 5 != 0 && $1 % 7 != 0 )); then
-        echo $1
-        exit 0
-    fi
-    
     accu=""
     if (( $1 % 3 == 0 )); then
         accu+="Pling"
@@ -16,7 +11,10 @@ main() {
     if (( $1 % 7 == 0 )); then
         accu+="Plong"
     fi
-    echo "$accu"
+    if [ "$accu" == "" ]; then
+        accu=$1
+    fi
+    echo $accu
 }
 
 main "$@"
