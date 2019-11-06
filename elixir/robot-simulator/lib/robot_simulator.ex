@@ -1,4 +1,6 @@
 defmodule RobotGuard do
+  defguard is_error(obj) when elem(obj, 0) == :error
+
   defguard valid_dir(direction)
            when direction == :north or
                   direction == :east or
@@ -23,16 +25,25 @@ defmodule RobotSimulator do
   @invalid_direction {:error, "invalid direction"}
   @invalid_position {:error, "invalid position"}
 
+  @turn %{
+    "L" => %{:north => :west, :west => :south, :south => :east, :east => :north },
+    "R" => %{:north => :east, :east => :south, :south => :west, :west => :north }
+  }
+
   @doc """
   Create a Robot Simulator given an initial direction and position.
 
   Valid directions are: `:north`, `:east`, `:south`, `:west`
   """
-  @spec create(dir :: atom, pos :: {integer, integer}) :: Robot | {:error, String.t()}
+  @spec create(dir :: atom | {:error, String.t()}, pos :: {integer, integer}) :: Robot | {:error, String.t()}
   def create(dir \\ :north, pos \\ {0, 0})
 
   def create(dir, pos) when valid_dir(dir) and valid_position(pos) do
     %Robot{:dir => dir, :pos => pos}
+  end
+
+  def create(error, _) when is_error(error) do
+    error
   end
 
   def create(dir, _) when not valid_dir(dir) do
@@ -42,6 +53,7 @@ defmodule RobotSimulator do
   def create(_, pos) when not valid_position(pos) do
     @invalid_position
   end
+
 
   @doc """
   Simulate the robot's movement given a string of instructions.
@@ -64,57 +76,34 @@ defmodule RobotSimulator do
     )
   end
 
+  @spec turn(from :: atom, to :: String.t()) :: atom | {:error, String.t()}
+  def turn(from, to) do
+    if Map.has_key?(@turn, to) do
+      @turn[to][from]
+    else
+      @invalid_instruction
+    end
+  end
+
   @spec move(robot :: Robot, command :: any) :: Robot | {:error, String.t()}
   def move(%Robot{:dir => :north, :pos => {x, y}}, "A") do
     create(:north, {x, y + 1})
-  end
-
-  def move(%Robot{:dir => :north, :pos => {x, y}}, "L") do
-    create(:west, {x, y})
-  end
-
-  def move(%Robot{:dir => :north, :pos => {x, y}}, "R") do
-    create(:east, {x, y})
   end
 
   def move(%Robot{:dir => :east, :pos => {x, y}}, "A") do
     create(:east, {x + 1, y})
   end
 
-  def move(%Robot{:dir => :east, :pos => {x, y}}, "L") do
-    create(:north, {x, y})
-  end
-
-  def move(%Robot{:dir => :east, :pos => {x, y}}, "R") do
-    create(:south, {x, y})
-  end
-
   def move(%Robot{:dir => :south, :pos => {x, y}}, "A") do
     create(:south, {x, y - 1})
-  end
-
-  def move(%Robot{:dir => :south, :pos => {x, y}}, "L") do
-    create(:east, {x, y})
-  end
-
-  def move(%Robot{:dir => :south, :pos => {x, y}}, "R") do
-    create(:west, {x, y})
   end
 
   def move(%Robot{:dir => :west, :pos => {x, y}}, "A") do
     create(:west, {x - 1, y})
   end
 
-  def move(%Robot{:dir => :west, :pos => {x, y}}, "L") do
-    create(:south, {x, y})
-  end
-
-  def move(%Robot{:dir => :west, :pos => {x, y}}, "R") do
-    create(:north, {x, y})
-  end
-
-  def move(_, _) do
-    @invalid_instruction
+  def move(robot, to) do
+    create(turn(direction(robot), to), position(robot))
   end
 
   @doc """
