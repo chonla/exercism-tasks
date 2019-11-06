@@ -19,10 +19,6 @@ end
 defmodule RobotSimulator do
   import RobotGuard
 
-  @commandA 65
-  @commandL 76
-  @commandR 82
-
   @invalid_instruction {:error, "invalid instruction"}
   @invalid_direction {:error, "invalid direction"}
   @invalid_position {:error, "invalid position"}
@@ -63,57 +59,57 @@ defmodule RobotSimulator do
 
   def simulate(robot, instructions) do
     simulate(
-      move(robot, List.first(to_charlist(instructions))),
+      move(robot, String.first(instructions)),
       String.slice(instructions, 1..-1)
     )
   end
 
   @spec move(robot :: Robot, command :: any) :: Robot | {:error, String.t()}
-  def move(%Robot{:dir => :north, :pos => {x, y}}, @commandA) do
+  def move(%Robot{:dir => :north, :pos => {x, y}}, "A") do
     create(:north, {x, y + 1})
   end
 
-  def move(%Robot{:dir => :north, :pos => {x, y}}, @commandL) do
+  def move(%Robot{:dir => :north, :pos => {x, y}}, "L") do
     create(:west, {x, y})
   end
 
-  def move(%Robot{:dir => :north, :pos => {x, y}}, @commandR) do
+  def move(%Robot{:dir => :north, :pos => {x, y}}, "R") do
     create(:east, {x, y})
   end
 
-  def move(%Robot{:dir => :east, :pos => {x, y}}, @commandA) do
+  def move(%Robot{:dir => :east, :pos => {x, y}}, "A") do
     create(:east, {x + 1, y})
   end
 
-  def move(%Robot{:dir => :east, :pos => {x, y}}, @commandL) do
+  def move(%Robot{:dir => :east, :pos => {x, y}}, "L") do
     create(:north, {x, y})
   end
 
-  def move(%Robot{:dir => :east, :pos => {x, y}}, @commandR) do
+  def move(%Robot{:dir => :east, :pos => {x, y}}, "R") do
     create(:south, {x, y})
   end
 
-  def move(%Robot{:dir => :south, :pos => {x, y}}, @commandA) do
+  def move(%Robot{:dir => :south, :pos => {x, y}}, "A") do
     create(:south, {x, y - 1})
   end
 
-  def move(%Robot{:dir => :south, :pos => {x, y}}, @commandL) do
+  def move(%Robot{:dir => :south, :pos => {x, y}}, "L") do
     create(:east, {x, y})
   end
 
-  def move(%Robot{:dir => :south, :pos => {x, y}}, @commandR) do
+  def move(%Robot{:dir => :south, :pos => {x, y}}, "R") do
     create(:west, {x, y})
   end
 
-  def move(%Robot{:dir => :west, :pos => {x, y}}, @commandA) do
+  def move(%Robot{:dir => :west, :pos => {x, y}}, "A") do
     create(:west, {x - 1, y})
   end
 
-  def move(%Robot{:dir => :west, :pos => {x, y}}, @commandL) do
+  def move(%Robot{:dir => :west, :pos => {x, y}}, "L") do
     create(:south, {x, y})
   end
 
-  def move(%Robot{:dir => :west, :pos => {x, y}}, @commandR) do
+  def move(%Robot{:dir => :west, :pos => {x, y}}, "R") do
     create(:north, {x, y})
   end
 
