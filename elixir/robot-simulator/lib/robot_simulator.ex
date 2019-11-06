@@ -49,8 +49,8 @@ defmodule RobotSimulator do
   Valid instructions are: "R" (turn right), "L", (turn left), and "A" (advance)
   """
   @spec simulate(robot :: Robot | {:error, String.t()}, instructions :: String.t()) :: Robot | {:error, String.t()}
-  def simulate(@invalid_instruction, _) do
-    @invalid_instruction
+  def simulate({:error, _} = error, _) do
+    error
   end
 
   def simulate(robot, "") do
