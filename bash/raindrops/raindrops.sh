@@ -6,16 +6,17 @@ main() {
         exit 0
     fi
     
+    accu=""
     if (( $1 % 3 == 0 )); then
-        printf "Pling"
+        accu+="Pling"
     fi
     if (( $1 % 5 == 0 )); then
-        printf "Plang"
+        accu+="Plang"
     fi
     if (( $1 % 7 == 0 )); then
-        printf "Plong"
+        accu+="Plong"
     fi
-    echo ""
+    echo "$accu"
 }
 
 main "$@"
