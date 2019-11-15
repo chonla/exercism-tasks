@@ -3,15 +3,17 @@
 open System
 
 let beerLeftVerse (numberOfBeer: int): string =
-    if numberOfBeer = 1 then "Take one down and pass it around, 1 bottle of beer on the wall."
-    elif numberOfBeer = 0 then "Take it down and pass it around, no more bottles of beer on the wall."
-    elif numberOfBeer < 0 then "Go to the store and buy some more, 99 bottles of beer on the wall."
-    else String.Format("Take one down and pass it around, {0} bottles of beer on the wall.", numberOfBeer)
+    match numberOfBeer with
+    | 1 -> "Take one down and pass it around, 1 bottle of beer on the wall."
+    | 0 -> "Take it down and pass it around, no more bottles of beer on the wall."
+    | numberOfBeer when numberOfBeer < 0 -> "Go to the store and buy some more, 99 bottles of beer on the wall."
+    | _ -> String.Format("Take one down and pass it around, {0} bottles of beer on the wall.", numberOfBeer)
 
 let beerOnTheWallVerse (numberOfBeer: int): string =
-    if numberOfBeer = 1 then "1 bottle of beer on the wall, 1 bottle of beer."
-    elif numberOfBeer = 0 then "No more bottles of beer on the wall, no more bottles of beer."
-    else String.Format("{0} bottles of beer on the wall, {0} bottles of beer.", numberOfBeer)
+    match numberOfBeer with
+    | 1 -> "1 bottle of beer on the wall, 1 bottle of beer."
+    | 0 -> "No more bottles of beer on the wall, no more bottles of beer."
+    | _ -> String.Format("{0} bottles of beer on the wall, {0} bottles of beer.", numberOfBeer)
 
 let verseOf (numberOfBeer: int): List<string> =
     [ ""
