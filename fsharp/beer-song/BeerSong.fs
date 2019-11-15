@@ -22,6 +22,5 @@ let verseOf (numberOfBeer: int): List<string> =
 
 let recite (startBottles: int) (takeDown: int): List<string> =
     List.init takeDown (fun index -> startBottles - index)
-    |> List.map verseOf
-    |> List.fold List.append []
+    |> List.collect verseOf
     |> List.tail
